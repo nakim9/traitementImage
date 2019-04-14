@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "BmpLib.h"
+#include "image.h"
 
-#define NOM_FICH "hibou.bmp"
+int main(void)
+{
+	DonneesImageRGB *image = NULL;
+	image = lisBMPRGB("hibou.bmp");
 
-// int main(void) {
-//   DonneesImageRGB * image;
-//   image = lisBMPRGB(NOM_FICH);
-//   //CREER 3 MATRICES
-//   //TRAITEMENTS
-//   //CREER IMAGE
-//   ecrisBMPRGB_Dans(image,NOM_FICH);
-//   return 0;
-// }
+	IMAGE * matrices = creer3Matrices(image);
+
+	image = creerImage(matrices);
+
+	ecrisBMPRGB_Dans(image,"test2.bmp");
+
+	return 0;
+}

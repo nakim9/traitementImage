@@ -1,11 +1,15 @@
 #include "BmpLib.h"
 
-typedef struct image{
-  short ** rouge;
-  short ** vert;
-  short ** bleu;
-}IMAGE;
+typedef struct 
+{
+	int hauteurImage;
+	int largeurImage;
+	short ** Bleu;
+	short ** Vert;
+	short ** Rouge;
+} IMAGE;
 
-IMAGE * creer3Matrices(DonneesImageRGB * image);
+IMAGE * creer3Matrices(DonneesImageRGB *image);
 
-int creerImage(DonneesImageRGB * donnees, IMAGE * image);
+DonneesImageRGB * creerImage(IMAGE *image);
+ 
