@@ -12,7 +12,7 @@ int main(void)
 
 	image = creerImage(matrices);
 
-	ecrisBMPRGB_Dans(image,"test2.bmp");
+	ecrisBMPRGB_Dans(image,"copie.bmp");
 
 	return 0;
 }
