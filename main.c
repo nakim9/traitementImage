@@ -72,9 +72,6 @@ int main(void)
             printf("Bye Bye \n");
             return 0;
             break;
-
-
-
 	}
     }
 
