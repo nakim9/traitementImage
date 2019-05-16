@@ -53,9 +53,7 @@ IMAGE * creer3MatricesNegatif(DonneesImageRGB *image)
 			bleu[i][j] = 255-image->donneesRGB[i*largeurImage*3 + j*3 + posB];
 			vert[i][j] = 255-image->donneesRGB[i*largeurImage*3 + j*3 + posV];
 			rouge[i][j] = 255-image->donneesRGB[i*largeurImage*3 + j*3 + posR];
-			bleu[i][j]=255-bleu[i][j];
-			vert[i][j]=255-vert[i][j];
-			rouge[i][j]=255-rouge[i][j];
+
 		}
 	}
 
