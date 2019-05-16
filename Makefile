@@ -1,22 +1,25 @@
 CC=gcc
-FLAGS= -Wall
+FLAGS= -Wall -lm
 EXE=exec
 
 all : $(EXE) clean
 
-$(EXE) : main.o BmpLib.o OutilsLib.o image.o
-	$(CC) -o $@ $^
+$(EXE) : main.o BmpLib.o OutilsLib.o image.o fft.o
+	$(CC) -o $@ $^ $(FLAGS)
 
-main.o : main.c BmpLib.h
+main.o : main.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
-BmpLib.o : BmpLib.c BmpLib.h
+BmpLib.o : BmpLib.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
-OutilsLib.o : OutilsLib.c OutilsLib.h
+OutilsLib.o : OutilsLib.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
 image.o : image.c
+	$(CC) -o $@ -c $^ $(FLAGS)
+
+fft.o : fft.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
 clean :
