@@ -4,9 +4,9 @@ typedef struct
 {
 	int hauteurImage;
 	int largeurImage;
-	short ** Bleu;
-	short ** Vert;
-	short ** Rouge;
+	unsigned short ** Bleu;
+	unsigned short ** Vert;
+	unsigned short ** Rouge;
 } IMAGE;
 
 IMAGE * creer3MatricesNegatif(DonneesImageRGB *image);

@@ -9,14 +9,14 @@ IMAGE * creer3MatricesNegatif(DonneesImageRGB *image)
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
-	short ** bleu 	= NULL;
-	short ** vert 	= NULL;
-	short ** rouge 	= NULL;
+	unsigned short ** bleu 	= NULL;
+	unsigned short ** vert 	= NULL;
+	unsigned short ** rouge 	= NULL;
 
 	/* ---Allocation--- */
-	bleu	= (short **)malloc(sizeof(short *) * hauteurImage);
-	vert	= (short **)malloc(sizeof(short *) * hauteurImage);
-	rouge	= (short **)malloc(sizeof(short *) * hauteurImage);
+	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
 
 	if(bleu == NULL || vert == NULL || rouge == NULL)
 	{
@@ -30,9 +30,9 @@ IMAGE * creer3MatricesNegatif(DonneesImageRGB *image)
 		vert[i]	= NULL;
 		rouge[i]	= NULL;
 
-		bleu[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		vert[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		rouge[i]	= (short *)malloc(sizeof(short) * largeurImage);
+		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
 
 		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL)
 		{
@@ -46,9 +46,9 @@ IMAGE * creer3MatricesNegatif(DonneesImageRGB *image)
 	{
 		for(int j=0 ; j < largeurImage ; j++)
 		{
-			short posB = 0;
-			short posV = 1;
-			short posR = 2;
+			unsigned short posB = 0;
+			unsigned short posV = 1;
+			unsigned short posR = 2;
 
 			bleu[i][j] = 255-image->donneesRGB[i*largeurImage*3 + j*3 + posB];
 			vert[i][j] = 255-image->donneesRGB[i*largeurImage*3 + j*3 + posV];
@@ -74,14 +74,14 @@ IMAGE * creer3MatricesNormal(DonneesImageRGB *image)
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
-	short ** bleu 	= NULL;
-	short ** vert 	= NULL;
-	short ** rouge 	= NULL;
+	unsigned short ** bleu 	= NULL;
+	unsigned short ** vert 	= NULL;
+	unsigned short ** rouge 	= NULL;
 
 	/* ---Allocation--- */
-	bleu	= (short **)malloc(sizeof(short *) * hauteurImage);
-	vert	= (short **)malloc(sizeof(short *) * hauteurImage);
-	rouge	= (short **)malloc(sizeof(short *) * hauteurImage);
+	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
 
 	if(bleu == NULL || vert == NULL || rouge == NULL)
 	{
@@ -95,9 +95,9 @@ IMAGE * creer3MatricesNormal(DonneesImageRGB *image)
 		vert[i]	= NULL;
 		rouge[i]	= NULL;
 
-		bleu[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		vert[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		rouge[i]	= (short *)malloc(sizeof(short) * largeurImage);
+		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
 
 		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL)
 		{
@@ -111,9 +111,9 @@ IMAGE * creer3MatricesNormal(DonneesImageRGB *image)
 	{
 		for(int j=0 ; j < largeurImage ; j++)
 		{
-			short posB = 0;
-			short posV = 1;
-			short posR = 2;
+			unsigned short posB = 0;
+			unsigned short posV = 1;
+			unsigned short posR = 2;
 
 			bleu[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posB];
 			vert[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posV];
@@ -152,9 +152,9 @@ DonneesImageRGB * creerImage(IMAGE *image)
 	{
 		for(int j = 0 ; j < largeur ; j++)
 		{
-			short posB = 0;
-			short posV = 1;
-			short posR = 2;
+			unsigned short posB = 0;
+			unsigned short posV = 1;
+			unsigned short posR = 2;
 
 			tab[i*largeur*3 + j*3 + posB] = image->Bleu[i][j]  ;
 			tab[i*largeur*3 + j*3 + posV] = image->Vert[i][j]  ;
@@ -182,15 +182,15 @@ IMAGE * creer3MatricesDegrade(DonneesImageRGB *image)
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
-	short ** bleu 	= NULL;
-	short ** vert 	= NULL;
-	short ** rouge 	= NULL;
+	unsigned short ** bleu 	= NULL;
+	unsigned short ** vert 	= NULL;
+	unsigned short ** rouge 	= NULL;
 	int r=0;
 
 	/* ---Allocation--- */
-	bleu	= (short **)malloc(sizeof(short *) * hauteurImage);
-	vert	= (short **)malloc(sizeof(short *) * hauteurImage);
-	rouge	= (short **)malloc(sizeof(short *) * hauteurImage);
+	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
 
 	if(bleu == NULL || vert == NULL || rouge == NULL)
 	{
@@ -204,9 +204,9 @@ IMAGE * creer3MatricesDegrade(DonneesImageRGB *image)
 		vert[i]	= NULL;
 		rouge[i]	= NULL;
 
-		bleu[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		vert[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		rouge[i]	= (short *)malloc(sizeof(short) * largeurImage);
+		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
 
 		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL)
 		{
@@ -220,9 +220,9 @@ IMAGE * creer3MatricesDegrade(DonneesImageRGB *image)
 	{
 		for(int j=0 ; j < largeurImage ; j++)
 		{
-			short posB = 0;
-			short posV = 1;
-			short posR = 2;
+			unsigned short posB = 0;
+			unsigned short posV = 1;
+			unsigned short posR = 2;
 
 			bleu[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posB];
 			vert[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posV];
@@ -263,14 +263,14 @@ IMAGE * creer3MatricesDamier(DonneesImageRGB *image)
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
-	short ** bleu 	= NULL;
-	short ** vert 	= NULL;
-	short ** rouge 	= NULL;
+	unsigned short ** bleu 	= NULL;
+	unsigned short ** vert 	= NULL;
+	unsigned short ** rouge 	= NULL;
 
 	/* ---Allocation--- */
-	bleu	= (short **)malloc(sizeof(short *) * hauteurImage);
-	vert	= (short **)malloc(sizeof(short *) * hauteurImage);
-	rouge	= (short **)malloc(sizeof(short *) * hauteurImage);
+	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
 
 	if(bleu == NULL || vert == NULL || rouge == NULL)
 	{
@@ -284,9 +284,9 @@ IMAGE * creer3MatricesDamier(DonneesImageRGB *image)
 		vert[i]	= NULL;
 		rouge[i]	= NULL;
 
-		bleu[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		vert[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		rouge[i]	= (short *)malloc(sizeof(short) * largeurImage);
+		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
 
 		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL)
 		{
@@ -300,9 +300,9 @@ IMAGE * creer3MatricesDamier(DonneesImageRGB *image)
 	{
 		for(int j=0 ; j < largeurImage ; j++)
 		{
-			short posB = 0;
-			short posV = 1;
-			short posR = 2;
+			unsigned short posB = 0;
+			unsigned short posV = 1;
+			unsigned short posR = 2;
 
 			bleu[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posB];
 			vert[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posV];
@@ -342,16 +342,16 @@ IMAGE * creer3MatricesSeuillage(DonneesImageRGB *image)
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
-	short ** bleu 	= NULL;
-	short ** vert 	= NULL;
-	short ** rouge 	= NULL;
-	short ** gris   = NULL;
+	unsigned short ** bleu 	= NULL;
+	unsigned short ** vert 	= NULL;
+	unsigned short ** rouge 	= NULL;
+	unsigned short ** gris   = NULL;
 
 	/* ---Allocation--- */
-	bleu	= (short **)malloc(sizeof(short *) * hauteurImage);
-	vert	= (short **)malloc(sizeof(short *) * hauteurImage);
-	rouge	= (short **)malloc(sizeof(short *) * hauteurImage);
-	gris	= (short **)malloc(sizeof(short *) * hauteurImage);
+	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	gris	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
 
 	if(bleu == NULL || vert == NULL || rouge == NULL || gris == NULL)
 	{
@@ -366,10 +366,10 @@ IMAGE * creer3MatricesSeuillage(DonneesImageRGB *image)
 		rouge[i]	= NULL;
 		gris[i]	= NULL;
 
-		bleu[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		vert[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		rouge[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		gris[i]	= (short *)malloc(sizeof(short) * largeurImage);
+		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		gris[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
 
 		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL || gris[i] == NULL)
 		{
@@ -383,9 +383,9 @@ IMAGE * creer3MatricesSeuillage(DonneesImageRGB *image)
 	{
 		for(int j=0 ; j < largeurImage ; j++)
 		{
-			short posB = 0;
-			short posV = 1;
-			short posR = 2;
+			unsigned short posB = 0;
+			unsigned short posV = 1;
+			unsigned short posR = 2;
 
 			bleu[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posB];
 			vert[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posV];
@@ -420,16 +420,16 @@ IMAGE * creer3MatricesNuancedegris(DonneesImageRGB *image)
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
-	short ** bleu 	= NULL;
-	short ** vert 	= NULL;
-	short ** rouge 	= NULL;
-	short ** gris   = NULL;
+	unsigned short ** bleu 	= NULL;
+	unsigned short ** vert 	= NULL;
+	unsigned short ** rouge 	= NULL;
+	unsigned short ** gris   = NULL;
 
 	/* ---Allocation--- */
-	bleu	= (short **)malloc(sizeof(short *) * hauteurImage);
-	vert	= (short **)malloc(sizeof(short *) * hauteurImage);
-	rouge	= (short **)malloc(sizeof(short *) * hauteurImage);
-	gris	= (short **)malloc(sizeof(short *) * hauteurImage);
+	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	gris	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
 
 	if(bleu == NULL || vert == NULL || rouge == NULL || gris == NULL)
 	{
@@ -444,10 +444,10 @@ IMAGE * creer3MatricesNuancedegris(DonneesImageRGB *image)
 		rouge[i]	= NULL;
 		gris[i]	= NULL;
 
-		bleu[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		vert[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		rouge[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		gris[i]	= (short *)malloc(sizeof(short) * largeurImage);
+		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		gris[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
 
 		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL || gris[i] == NULL)
 		{
@@ -461,9 +461,9 @@ IMAGE * creer3MatricesNuancedegris(DonneesImageRGB *image)
 	{
 		for(int j=0 ; j < largeurImage ; j++)
 		{
-			short posB = 0;
-			short posV = 1;
-			short posR = 2;
+			unsigned short posB = 0;
+			unsigned short posV = 1;
+			unsigned short posR = 2;
 
 			bleu[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posB];
 			vert[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posV];
@@ -488,7 +488,7 @@ IMAGE * creerVagueSinuosidaleHorizontale()
 {
 	IMAGE * image = creerImageNoire();
 	const double PI = atan(1)*4;
-	short res ;
+	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
 		res = (sin(i*6*PI/256)+1)*255/2;
 		for (int j = 0; j < image->largeurImage; j++) {
@@ -501,9 +501,9 @@ IMAGE * creerVagueSinuosidaleHorizontale()
 	return image;
 }
 
-short * decalage(short * buf, int sizeBuf, int decallage)
+unsigned short * decalage(unsigned short * buf, int sizeBuf, int decallage)
 {
-	short * cpy = malloc(sizeof(short)*sizeBuf);
+	unsigned short * cpy = malloc(sizeof(unsigned short)*sizeBuf);
 	for(int i = 0; i < sizeBuf ; i++){
 		cpy[i] = buf[i];
 	}
@@ -518,7 +518,7 @@ IMAGE * creerVagueSinuosidaleDiagonales()
 {
 	IMAGE * image = creerImageNoire();
 	const double PI = atan(1)*4;
-	short res ;
+	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
 		res = (sin(i*6*PI/256)+1)*255/2;
 		for (int j = 0; j < image->largeurImage; j++) {
@@ -541,7 +541,7 @@ IMAGE * creerVagueSinuosidaleVerticale()
 {
 	IMAGE * image = creerImageNoire();
 	const double PI = atan(1)*4;
-	short res ;
+	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
 		res = (sin(i*6*PI/256)+1)*255/2;
 		for (int j = 0; j < image->largeurImage; j++) {
@@ -558,14 +558,14 @@ IMAGE * creerImageNoire(void){
 	/* ---Variables--- */
 	int hauteurImage = 256;
 	int largeurImage = 256;
-	short ** bleu 	= NULL;
-	short ** vert 	= NULL;
-	short ** rouge 	= NULL;
+	unsigned short ** bleu 	= NULL;
+	unsigned short ** vert 	= NULL;
+	unsigned short ** rouge 	= NULL;
 
 	/* ---Allocation--- */
-	bleu	= (short **)malloc(sizeof(short *) * hauteurImage);
-	vert	= (short **)malloc(sizeof(short *) * hauteurImage);
-	rouge	= (short **)malloc(sizeof(short *) * hauteurImage);
+	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
+	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
 
 	if(bleu == NULL || vert == NULL || rouge == NULL)
 	{
@@ -579,9 +579,9 @@ IMAGE * creerImageNoire(void){
 		vert[i]	= NULL;
 		rouge[i]	= NULL;
 
-		bleu[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		vert[i]	= (short *)malloc(sizeof(short) * largeurImage);
-		rouge[i]	= (short *)malloc(sizeof(short) * largeurImage);
+		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
+		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
 
 		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL)
 		{
@@ -613,53 +613,187 @@ IMAGE * creerImageNoire(void){
 	return couleur;
 }
 
+IMAGE * creerFFT(IMAGE * img){
+	int hauteurImage = img->hauteurImage;
+	int largeurImage = img->largeurImage;
+	cplx ** tmp 	= NULL;
 
-IMAGE * creerFFT(IMAGE * matrices){
-	int hauteur = matrices->hauteurImage;
-	int largeur = matrices->largeurImage;
-	int valNb = hauteur*largeur;
 
-	IMAGE * tmp = matrices;
+	/* ---Allocation--- */
+	tmp	= (cplx **)malloc(sizeof(cplx *) * hauteurImage);
 
-	COMPLEX * data = NULL;
-	data = malloc(sizeof(COMPLEX)*valNb);
-	if(data == NULL) return NULL;
+	if(tmp == NULL)
+	{
+		printf("Error malloc\n");
+		return NULL;
+	}
 
-	for (int i = 0; i < hauteur; i++) {
-		for (int j = 0; j < largeur; j++) {
-			data[i*largeur+j].Re = matrices->Bleu[i][j];
-			data[i*largeur+j].Im = 0;
+	for(int i=0 ; i < hauteurImage ; i++)
+	{
+		tmp[i]	= NULL;
+		tmp[i]	= (cplx *)malloc(sizeof(cplx) * largeurImage);
+		if(tmp[i] == NULL)
+		{
+			printf("Error malloc\n");
+			return NULL;
 		}
 	}
-	fft2D(data,hauteur,largeur,1);
-	short value = data[0].Re;
-	short max = value;
-	short min = value;
 
-	for (int i = 0; i < hauteur; i++) {
-		for (int j = 0; j < largeur; j++) {
-			value = data[i*largeur+j].Re;
-			if(value < 0)
-				value = 0;
-			if(max < value)
-				max = value;
-			if(min > value)
-				min = value;
+	for (int i = 0; i < hauteurImage; i++) {
+		for (int j = 0; j < largeurImage; j++) {
+			tmp[i][j] = img->Bleu[i][j] + I*0;
+		}
+		fft(tmp[i],largeurImage);
+	}
 
-			tmp->Bleu[i][j] 	= value;
-			tmp->Vert[i][j]		= value;
-			tmp->Rouge[i][j]	= value;
+	cplx ** cpy = NULL;
+
+	/* ---Allocation--- */
+	cpy	= (cplx **)malloc(sizeof(cplx *) * hauteurImage);
+
+	if(cpy == NULL)
+	{
+		printf("Error malloc\n");
+		return NULL;
+	}
+
+	for(int i=0 ; i < hauteurImage ; i++)
+	{
+		cpy[i]	= NULL;
+		cpy[i]	= (cplx *)malloc(sizeof(cplx) * largeurImage);
+		if(cpy[i] == NULL)
+		{
+			printf("Error malloc\n");
+			return NULL;
 		}
 	}
-	for (int i = 0; i < hauteur; i++) {
-		for (int j = 0; j < largeur; j++) {
-			value = (((tmp->Bleu[i][j])-min)*255)/(max-min);
 
-			tmp->Bleu[i][j] 	= value;
-			tmp->Vert[i][j]		= value;
-			tmp->Rouge[i][j]	= value;
+	for (int i = 0; i < hauteurImage; i++) {
+		for (int j = 0; j < largeurImage; j++) {
+			cpy[i][j] = tmp[i][j];
 		}
 	}
-	return tmp;
 
+	for (int i = 0; i < hauteurImage; i++) {
+		for (int j = 0; j < largeurImage; j++) {
+			tmp[i][j] = cpy[j][i];
+		}
+		fft(tmp[i],largeurImage);
+	}
+	/* Transposée */
+	for (int i = 0; i < hauteurImage; i++) {
+		for (int j = 0; j < largeurImage; j++) {
+			cpy[i][j] = tmp[i][j];
+		}
+	}
+
+	for (int i = 0; i < hauteurImage; i++) {
+		for (int j = 0; j < largeurImage; j++) {
+			tmp[i][j] = cpy[j][i];
+		}
+	}
+	/* Fin Transposée */
+	IMAGE * image = NULL;
+	image = creerImageNoire();
+	if(image == NULL) return NULL;
+	unsigned short val = 0;
+	double realvar = 0.0;
+	double imagvar = 0.0;
+	unsigned short min = sizeof(unsigned short);
+	unsigned short max = 0;
+	for (int i = 0; i < hauteurImage; i++) {
+		for (int j = 0; j < largeurImage; j++) {
+			realvar = creal(tmp[i][j]);
+			imagvar = cimag(tmp[i][j]);
+			val = sqrt((realvar*realvar) + (imagvar*imagvar));
+			if(val < min)
+				min = val;
+			if(val > max)
+				max = val;
+			image->Bleu[i][j] = val;
+			image->Rouge[i][j] = val;
+			image->Vert[i][j] = val;
+		}
+	}
+
+	for (int i = 0; i < hauteurImage; i++) {
+		for (int j = 0; j < largeurImage; j++) {
+			val =image->Bleu[i][j];
+			image->Bleu[i][j] = 255*((val-min)/(max-min));
+			image->Rouge[i][j] = 255*((val-min)/(max-min));
+			image->Vert[i][j] = 255*((val-min)/(max-min));
+		}
+	}
+
+	/* ---Variables--- */
+	int hauteurOut = 256*2;
+	int largeurOut = 256*2;
+	unsigned short ** bleuOut 	= NULL;
+	unsigned short ** vertOut 	= NULL;
+	unsigned short ** rougeOut 	= NULL;
+
+	/* ---Allocation--- */
+	bleuOut	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurOut);
+	vertOut	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurOut);
+	rougeOut	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurOut);
+
+	if(bleuOut == NULL || vertOut == NULL || rougeOut == NULL)
+	{
+		printf("Error malloc\n");
+		return NULL;
+	}
+
+	for(int i=0 ; i < hauteurOut ; i++)
+	{
+		bleuOut[i]	= NULL;
+		vertOut[i]	= NULL;
+		rougeOut[i]	= NULL;
+
+		bleuOut[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurOut);
+		vertOut[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurOut);
+		rougeOut[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurOut);
+
+		if(bleuOut[i] == NULL || vertOut[i] == NULL || rougeOut[i] == NULL)
+		{
+			printf("Error malloc\n");
+			return NULL;
+		}
+	}
+
+	IMAGE * imageOut = malloc(sizeof(IMAGE));
+	imageOut->largeurImage = largeurOut;
+	imageOut->hauteurImage = hauteurOut;
+	imageOut->Bleu = bleuOut;
+	imageOut->Vert = vertOut;
+	imageOut->Rouge = rougeOut;
+	for (int i = 0; i < hauteurOut/2; i++) {
+		for (int j = 0; j < largeurOut/2; j++) {
+			imageOut->Bleu[i][j] = image->Bleu[image->largeurImage-1-i][image->hauteurImage-1-j];
+			imageOut->Vert[i][j] = image->Vert[image->largeurImage-1-i][image->hauteurImage-1-j];
+			imageOut->Rouge[i][j] = image->Rouge[image->largeurImage-1-i][image->hauteurImage-1-j];
+		}
+	}
+	for (int i = 0; i < hauteurOut/2; i++) {
+		for (int j = largeurOut/2; j < largeurOut; j++) {
+			imageOut->Bleu[i][j] = image->Bleu[image->largeurImage-1-i][j%image->hauteurImage];
+			imageOut->Vert[i][j] = image->Vert[image->largeurImage-1-i][j%image->hauteurImage];
+			imageOut->Rouge[i][j] = image->Rouge[image->largeurImage-1-i][j%image->hauteurImage];
+		}
+	}
+	for (int i = hauteurOut/2; i < hauteurOut; i++) {
+		for (int j = 0; j < largeurOut/2; j++) {
+			imageOut->Bleu[i][j] = image->Bleu[i%image->largeurImage][image->largeurImage-1-j];
+			imageOut->Vert[i][j] = image->Vert[i%image->largeurImage][image->largeurImage-1-j];
+			imageOut->Rouge[i][j] = image->Rouge[i%image->largeurImage][image->largeurImage-1-j];
+		}
+	}
+	for (int i = hauteurOut/2; i < hauteurOut; i++) {
+		for (int j = largeurOut/2; j < largeurOut; j++) {
+			imageOut->Bleu[i][j] = image->Bleu[i%image->largeurImage][j%image->largeurImage];
+			imageOut->Vert[i][j] = image->Vert[i%image->largeurImage][j%image->largeurImage];
+			imageOut->Rouge[i][j] = image->Rouge[i%image->largeurImage][j%image->largeurImage];
+		}
+	}
+
+	return imageOut;
 }
