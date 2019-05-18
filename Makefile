@@ -4,7 +4,7 @@ EXE=exec
 
 all : $(EXE) clean
 
-$(EXE) : main.o BmpLib.o OutilsLib.o image.o fft.o
+$(EXE) : main.o BmpLib.o OutilsLib.o image.o fft.o complexUtils.o
 	$(CC) -o $@ $^ $(FLAGS)
 
 main.o : main.c
@@ -17,10 +17,13 @@ OutilsLib.o : OutilsLib.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
 image.o : image.c
-	$(CC) -o $@ -c $^ $(FLAGS)
+	$(CC) -o $@ -c $< $(FLAGS)
 
 fft.o : fft.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
+complexUtils.o : complexUtils.c
+	$(CC) -o $@ -c $< $(FLAGS)
+	
 clean :
 	rm -rf *.o

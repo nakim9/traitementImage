@@ -23,8 +23,6 @@ IMAGE * creer3MatricesDamier(DonneesImageRGB *image);
 
 IMAGE * creer3MatricesDegrade(DonneesImageRGB *image);
 
-IMAGE * creerImageNoire(void);
-
 IMAGE * creerVagueSinuosidaleHorizontale();
 
 IMAGE * creerVagueSinuosidaleDiagonales();
@@ -32,3 +30,5 @@ IMAGE * creerVagueSinuosidaleDiagonales();
 IMAGE * creerVagueSinuosidaleVerticale();
 
 IMAGE * creerFFT(IMAGE * matrices);
+
+IMAGE * creerImageVide(int hauteur, int largeur);

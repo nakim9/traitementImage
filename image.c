@@ -3,6 +3,7 @@
 #include <math.h>
 #include "image.h"
 #include "fft.h"
+#include "complexUtils.h"
 
 IMAGE * creer3MatricesNegatif(DonneesImageRGB *image)
 {
@@ -172,9 +173,7 @@ DonneesImageRGB * creerImage(IMAGE *image)
 	donnees->largeurImage 	= largeur ;
 	donnees->donneesRGB 	= tab ;
 
-return donnees ;
-
-
+	return donnees;
 }
 
 IMAGE * creer3MatricesDegrade(DonneesImageRGB *image)
@@ -484,9 +483,22 @@ IMAGE * creer3MatricesNuancedegris(DonneesImageRGB *image)
 	return couleur;
 }
 
+unsigned short * decalage(unsigned short * buf, int sizeBuf, int decallage)
+{
+	unsigned short * cpy = malloc(sizeof(unsigned short)*sizeBuf);
+	for(int i = 0; i < sizeBuf ; i++){
+		cpy[i] = buf[i];
+	}
+
+	for (int i = 0; i < sizeBuf; i++) {
+		buf[i] = cpy[(i+decallage)%sizeBuf];
+	}
+	return buf;
+}
+
 IMAGE * creerVagueSinuosidaleHorizontale()
 {
-	IMAGE * image = creerImageNoire();
+	IMAGE * image = creerImageVide(256,256);
 	const double PI = atan(1)*4;
 	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
@@ -501,22 +513,9 @@ IMAGE * creerVagueSinuosidaleHorizontale()
 	return image;
 }
 
-unsigned short * decalage(unsigned short * buf, int sizeBuf, int decallage)
-{
-	unsigned short * cpy = malloc(sizeof(unsigned short)*sizeBuf);
-	for(int i = 0; i < sizeBuf ; i++){
-		cpy[i] = buf[i];
-	}
-
-	for (int i = 0; i < sizeBuf; i++) {
-		buf[i] = cpy[(i+decallage)%sizeBuf];
-	}
-	return buf;
-}
-
 IMAGE * creerVagueSinuosidaleDiagonales()
 {
-	IMAGE * image = creerImageNoire();
+	IMAGE * image = creerImageVide(256,256);
 	const double PI = atan(1)*4;
 	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
@@ -539,7 +538,7 @@ IMAGE * creerVagueSinuosidaleDiagonales()
 
 IMAGE * creerVagueSinuosidaleVerticale()
 {
-	IMAGE * image = creerImageNoire();
+	IMAGE * image = creerImageVide(256,256);
 	const double PI = atan(1)*4;
 	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
@@ -554,90 +553,12 @@ IMAGE * creerVagueSinuosidaleVerticale()
 	return image;
 }
 
-IMAGE * creerImageNoire(void){
-	/* ---Variables--- */
-	int hauteurImage = 256;
-	int largeurImage = 256;
-	unsigned short ** bleu 	= NULL;
-	unsigned short ** vert 	= NULL;
-	unsigned short ** rouge 	= NULL;
-
-	/* ---Allocation--- */
-	bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
-	vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
-	rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurImage);
-
-	if(bleu == NULL || vert == NULL || rouge == NULL)
-	{
-		printf("Error malloc\n");
-		return NULL;
-	}
-
-	for(int i=0 ; i < hauteurImage ; i++)
-	{
-		bleu[i]	= NULL;
-		vert[i]	= NULL;
-		rouge[i]	= NULL;
-
-		bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
-		vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
-		rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurImage);
-
-		if(bleu[i] == NULL || vert[i] == NULL || rouge[i] == NULL)
-		{
-			printf("Error malloc\n");
-			return NULL;
-		}
-	}
-
-	/* ---Insertion dans les matrices--- */
-	for(int i=0 ; i < hauteurImage ; i++)
-	{
-		for(int j=0 ; j < largeurImage ; j++)
-		{
-			bleu[i][j] = 0;
-			vert[i][j] = 0;
-			rouge[i][j] = 0;
-		}
-	}
-
-	IMAGE * couleur = NULL;
-	couleur = malloc(sizeof(IMAGE));
-
-	couleur->hauteurImage = hauteurImage;
-	couleur->largeurImage = largeurImage;
-	couleur->Bleu = bleu;
-	couleur->Vert = vert;
-	couleur->Rouge = rouge;
-
-	return couleur;
-}
-
-IMAGE * creerFFT(IMAGE * img){
+IMAGE * creerFFT(IMAGE * img)
+{
 	int hauteurImage = img->hauteurImage;
 	int largeurImage = img->largeurImage;
-	cplx ** tmp 	= NULL;
 
-
-	/* ---Allocation--- */
-	tmp	= (cplx **)malloc(sizeof(cplx *) * hauteurImage);
-
-	if(tmp == NULL)
-	{
-		printf("Error malloc\n");
-		return NULL;
-	}
-
-	for(int i=0 ; i < hauteurImage ; i++)
-	{
-		tmp[i]	= NULL;
-		tmp[i]	= (cplx *)malloc(sizeof(cplx) * largeurImage);
-		if(tmp[i] == NULL)
-		{
-			printf("Error malloc\n");
-			return NULL;
-		}
-	}
+	cplx ** tmp = creerTabCplx(hauteurImage,largeurImage);
 
 	for (int i = 0; i < hauteurImage; i++) {
 		for (int j = 0; j < largeurImage; j++) {
@@ -646,27 +567,7 @@ IMAGE * creerFFT(IMAGE * img){
 		fft(tmp[i],largeurImage);
 	}
 
-	cplx ** cpy = NULL;
-
-	/* ---Allocation--- */
-	cpy	= (cplx **)malloc(sizeof(cplx *) * hauteurImage);
-
-	if(cpy == NULL)
-	{
-		printf("Error malloc\n");
-		return NULL;
-	}
-
-	for(int i=0 ; i < hauteurImage ; i++)
-	{
-		cpy[i]	= NULL;
-		cpy[i]	= (cplx *)malloc(sizeof(cplx) * largeurImage);
-		if(cpy[i] == NULL)
-		{
-			printf("Error malloc\n");
-			return NULL;
-		}
-	}
+	cplx ** cpy = creerTabCplx(hauteurImage,largeurImage);
 
 	for (int i = 0; i < hauteurImage; i++) {
 		for (int j = 0; j < largeurImage; j++) {
@@ -680,6 +581,7 @@ IMAGE * creerFFT(IMAGE * img){
 		}
 		fft(tmp[i],largeurImage);
 	}
+
 	/* Transposée */
 	for (int i = 0; i < hauteurImage; i++) {
 		for (int j = 0; j < largeurImage; j++) {
@@ -693,14 +595,17 @@ IMAGE * creerFFT(IMAGE * img){
 		}
 	}
 	/* Fin Transposée */
+
 	IMAGE * image = NULL;
-	image = creerImageNoire();
+	image = creerImageVide(256,256);
 	if(image == NULL) return NULL;
+
 	unsigned short val = 0;
 	double realvar = 0.0;
 	double imagvar = 0.0;
 	unsigned short min = sizeof(unsigned short);
 	unsigned short max = 0;
+
 	for (int i = 0; i < hauteurImage; i++) {
 		for (int j = 0; j < largeurImage; j++) {
 			realvar = creal(tmp[i][j]);
@@ -725,47 +630,13 @@ IMAGE * creerFFT(IMAGE * img){
 		}
 	}
 
-	/* ---Variables--- */
 	int hauteurOut = 256*2;
 	int largeurOut = 256*2;
-	unsigned short ** bleuOut 	= NULL;
-	unsigned short ** vertOut 	= NULL;
-	unsigned short ** rougeOut 	= NULL;
 
-	/* ---Allocation--- */
-	bleuOut	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurOut);
-	vertOut	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurOut);
-	rougeOut	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteurOut);
-
-	if(bleuOut == NULL || vertOut == NULL || rougeOut == NULL)
-	{
-		printf("Error malloc\n");
-		return NULL;
-	}
-
-	for(int i=0 ; i < hauteurOut ; i++)
-	{
-		bleuOut[i]	= NULL;
-		vertOut[i]	= NULL;
-		rougeOut[i]	= NULL;
-
-		bleuOut[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurOut);
-		vertOut[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurOut);
-		rougeOut[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeurOut);
-
-		if(bleuOut[i] == NULL || vertOut[i] == NULL || rougeOut[i] == NULL)
-		{
-			printf("Error malloc\n");
-			return NULL;
-		}
-	}
-
-	IMAGE * imageOut = malloc(sizeof(IMAGE));
-	imageOut->largeurImage = largeurOut;
-	imageOut->hauteurImage = hauteurOut;
-	imageOut->Bleu = bleuOut;
-	imageOut->Vert = vertOut;
-	imageOut->Rouge = rougeOut;
+	IMAGE * imageOut = NULL;
+	imageOut = creerImageVide(hauteurOut,largeurOut);
+	if(imageOut == NULL) return NULL;
+	/* Quart inferieur gauche */
 	for (int i = 0; i < hauteurOut/2; i++) {
 		for (int j = 0; j < largeurOut/2; j++) {
 			imageOut->Bleu[i][j] = image->Bleu[image->largeurImage-1-i][image->hauteurImage-1-j];
@@ -773,6 +644,7 @@ IMAGE * creerFFT(IMAGE * img){
 			imageOut->Rouge[i][j] = image->Rouge[image->largeurImage-1-i][image->hauteurImage-1-j];
 		}
 	}
+	/* Quart inferieur droit */
 	for (int i = 0; i < hauteurOut/2; i++) {
 		for (int j = largeurOut/2; j < largeurOut; j++) {
 			imageOut->Bleu[i][j] = image->Bleu[image->largeurImage-1-i][j%image->hauteurImage];
@@ -780,6 +652,7 @@ IMAGE * creerFFT(IMAGE * img){
 			imageOut->Rouge[i][j] = image->Rouge[image->largeurImage-1-i][j%image->hauteurImage];
 		}
 	}
+	/* Quart superieur gauche */
 	for (int i = hauteurOut/2; i < hauteurOut; i++) {
 		for (int j = 0; j < largeurOut/2; j++) {
 			imageOut->Bleu[i][j] = image->Bleu[i%image->largeurImage][image->largeurImage-1-j];
@@ -787,6 +660,7 @@ IMAGE * creerFFT(IMAGE * img){
 			imageOut->Rouge[i][j] = image->Rouge[i%image->largeurImage][image->largeurImage-1-j];
 		}
 	}
+	/* Quart superieur droit */
 	for (int i = hauteurOut/2; i < hauteurOut; i++) {
 		for (int j = largeurOut/2; j < largeurOut; j++) {
 			imageOut->Bleu[i][j] = image->Bleu[i%image->largeurImage][j%image->largeurImage];
@@ -796,4 +670,42 @@ IMAGE * creerFFT(IMAGE * img){
 	}
 
 	return imageOut;
+}
+
+IMAGE * creerImageVide(int hauteur, int largeur){
+	/* ---Variables--- */
+
+	IMAGE * image = malloc(sizeof(IMAGE));
+	image->largeurImage = largeur;
+	image->hauteurImage = hauteur;
+
+	/* ---Allocation--- */
+	image->Bleu	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteur);
+	image->Vert	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteur);
+	image->Rouge	= (unsigned short **)malloc(sizeof(unsigned short *) * hauteur);
+
+	if(image->Bleu == NULL || image->Vert == NULL || image->Rouge == NULL)
+	{
+		printf("Error malloc\n");
+		return NULL;
+	}
+
+	for(int i=0 ; i < hauteur ; i++)
+	{
+		image->Bleu[i]	= NULL;
+		image->Vert[i]	= NULL;
+		image->Rouge[i]	= NULL;
+
+		image->Bleu[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeur);
+		image->Vert[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeur);
+		image->Rouge[i]	= (unsigned short *)malloc(sizeof(unsigned short) * largeur);
+
+		if(image->Bleu[i] == NULL || image->Vert[i] == NULL || image->Rouge[i] == NULL)
+		{
+			printf("Error malloc\n");
+			return NULL;
+		}
+	}
+
+	return image;
 }

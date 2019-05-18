@@ -8,13 +8,13 @@ void menufft(void);
 
 int main(void)
 {
-    int choix;
+
+  int choix;
 	DonneesImageRGB *image = NULL;
 	image = lisBMPRGB("hibou.bmp");
 	IMAGE * matrices=NULL;
 
-	while(choix)
-    {
+	do{
 
 	printf("Traitement d'images\n");
 	printf("1 - Negatif d'une image\n");
@@ -73,7 +73,7 @@ int main(void)
             return 0;
             break;
 	}
-    }
+}while(choix);
 
 
 	return 0;
@@ -83,7 +83,7 @@ void menufft(void){
   int choix;
   DonneesImageRGB * rgb = NULL;
   IMAGE * matrice = NULL;
-  while(choix){
+  do{
     puts("  - Sur quel type d'image voulez vous faire une transformée ?\n");
     puts("  - 1 Sinusoïde verticale");
     puts("  - 2 Sinusoïde horizontale");
@@ -150,7 +150,7 @@ void menufft(void){
       strcpy(nomfori,"damier.bmp");
       strcpy(nomffft,"fftdamier.bmp");
 
-      matrice = creer3MatricesDamier(creerImage(creerImageNoire()));
+      matrice = creer3MatricesDamier(creerImage(creerImageVide(256,256)));
       rgb = creerImage(matrice);
       ecrisBMPRGB_Dans(rgb,nomfori);
 
@@ -164,7 +164,7 @@ void menufft(void){
       strcpy(nomfori,"degrade.bmp");
       strcpy(nomffft,"fftdegrade.bmp");
 
-      matrice = creer3MatricesDegrade(creerImage(creerImageNoire()));
+      matrice = creer3MatricesDegrade(creerImage(creerImageVide(256,256)));
       rgb = creerImage(matrice);
       ecrisBMPRGB_Dans(rgb,nomfori);
 
@@ -178,5 +178,5 @@ void menufft(void){
       puts("Retour au menu principal\n");
       break;
     }
-  }
+  }while(choix);
 }
