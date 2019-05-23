@@ -28,3 +28,20 @@ cplx ** creerTabCplx(int hauteur, int largeur){
 
   return tmp;
 }
+
+void transposee(cplx ** tab, int hauteur, int largeur){
+  cplx ** cpy = creerTabCplx(hauteur,largeur);
+
+	for (int i = 0; i < hauteur; i++) {
+		for (int j = 0; j < largeur; j++) {
+			cpy[i][j] = tab[i][j];
+		}
+	}
+
+	for (int i = 0; i < hauteur; i++) {
+		for (int j = 0; j < largeur; j++) {
+			tab[i][j] = cpy[j][i];
+		}
+	}
+  free(cpy);
+}

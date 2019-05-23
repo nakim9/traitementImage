@@ -139,7 +139,10 @@ void menufft(void){
       strcpy(nomfori,"hibou.bmp");
       strcpy(nomffft,"ffthibou.bmp");
 
-      matrice = creer3MatricesNormal(lisBMPRGB(nomfori));
+      matrice = creer3MatricesNuancedegris(lisBMPRGB(nomfori));
+      rgb = creerImage(matrice);
+      ecrisBMPRGB_Dans(rgb,"hibougrix.bmp");
+
       matrice = creerFFT(matrice);
       rgb = creerImage(matrice);
       ecrisBMPRGB_Dans(rgb, nomffft);

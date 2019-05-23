@@ -5,8 +5,7 @@
 #include "fft.h"
 #include "complexUtils.h"
 
-IMAGE * creer3MatricesNegatif(DonneesImageRGB *image)
-{
+IMAGE * creer3MatricesNegatif(DonneesImageRGB *image){
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
@@ -70,8 +69,7 @@ IMAGE * creer3MatricesNegatif(DonneesImageRGB *image)
 	return couleur;
 }
 
-IMAGE * creer3MatricesNormal(DonneesImageRGB *image)
-{
+IMAGE * creer3MatricesNormal(DonneesImageRGB *image){
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
@@ -135,8 +133,7 @@ IMAGE * creer3MatricesNormal(DonneesImageRGB *image)
 	return couleur;
 }
 
-DonneesImageRGB * creerImage(IMAGE *image)
-{
+DonneesImageRGB * creerImage(IMAGE *image){
 	/* ---Variables--- */
 	int hauteur = image->hauteurImage;
 	int largeur = image->largeurImage;
@@ -176,8 +173,7 @@ DonneesImageRGB * creerImage(IMAGE *image)
 	return donnees;
 }
 
-IMAGE * creer3MatricesDegrade(DonneesImageRGB *image)
-{
+IMAGE * creer3MatricesDegrade(DonneesImageRGB *image){
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
@@ -257,8 +253,7 @@ IMAGE * creer3MatricesDegrade(DonneesImageRGB *image)
 	return couleur;
 }
 
-IMAGE * creer3MatricesDamier(DonneesImageRGB *image)
-{
+IMAGE * creer3MatricesDamier(DonneesImageRGB *image){
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
@@ -307,7 +302,7 @@ IMAGE * creer3MatricesDamier(DonneesImageRGB *image)
 			vert[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posV];
 			rouge[i][j] = image->donneesRGB[i*largeurImage*3 + j*3 + posR];
 
-			if(((i/64)+(j/64))%2)
+			if(((i/16)+(j/16))%2)
             {
                 bleu[i][j]=255;
                 rouge[i][j]=255;
@@ -336,8 +331,7 @@ IMAGE * creer3MatricesDamier(DonneesImageRGB *image)
 	return couleur;
 }
 
-IMAGE * creer3MatricesSeuillage(DonneesImageRGB *image)
-{
+IMAGE * creer3MatricesSeuillage(DonneesImageRGB *image){
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
@@ -414,8 +408,7 @@ IMAGE * creer3MatricesSeuillage(DonneesImageRGB *image)
 	return couleur;
 }
 
-IMAGE * creer3MatricesNuancedegris(DonneesImageRGB *image)
-{
+IMAGE * creer3MatricesNuancedegris(DonneesImageRGB *image){
 	/* ---Variables--- */
 	int hauteurImage = image->hauteurImage;
 	int largeurImage = image->largeurImage;
@@ -483,8 +476,7 @@ IMAGE * creer3MatricesNuancedegris(DonneesImageRGB *image)
 	return couleur;
 }
 
-unsigned short * decalage(unsigned short * buf, int sizeBuf, int decallage)
-{
+unsigned short * decalage(unsigned short * buf, int sizeBuf, int decallage){
 	unsigned short * cpy = malloc(sizeof(unsigned short)*sizeBuf);
 	for(int i = 0; i < sizeBuf ; i++){
 		cpy[i] = buf[i];
@@ -496,30 +488,27 @@ unsigned short * decalage(unsigned short * buf, int sizeBuf, int decallage)
 	return buf;
 }
 
-IMAGE * creerVagueSinuosidaleHorizontale()
-{
+IMAGE * creerVagueSinuosidaleHorizontale(){
 	IMAGE * image = creerImageVide(256,256);
 	const double PI = atan(1)*4;
 	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
-		res = (sin(i*6*PI/256)+1)*255/2;
+		res = (sin(i*32*PI/256)+1)*255/2;
 		for (int j = 0; j < image->largeurImage; j++) {
 			image->Bleu[i][j] = res;
 			image->Vert[i][j] = res;
 			image->Rouge[i][j] = res;
 		}
 	}
-
 	return image;
 }
 
-IMAGE * creerVagueSinuosidaleDiagonales()
-{
+IMAGE * creerVagueSinuosidaleDiagonales(){
 	IMAGE * image = creerImageVide(256,256);
 	const double PI = atan(1)*4;
 	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
-		res = (sin(i*6*PI/256)+1)*255/2;
+		res = (sin(i*32*PI/256)+1)*255/2;
 		for (int j = 0; j < image->largeurImage; j++) {
 			image->Bleu[j][i] = res;
 			image->Vert[j][i] = res;
@@ -536,13 +525,12 @@ IMAGE * creerVagueSinuosidaleDiagonales()
 	return image;
 }
 
-IMAGE * creerVagueSinuosidaleVerticale()
-{
+IMAGE * creerVagueSinuosidaleVerticale(){
 	IMAGE * image = creerImageVide(256,256);
 	const double PI = atan(1)*4;
 	unsigned short res ;
 	for (int i = 0; i < image->hauteurImage; i++) {
-		res = (sin(i*6*PI/256)+1)*255/2;
+		res = (sin(i*32*PI/256)+1)*255/2;
 		for (int j = 0; j < image->largeurImage; j++) {
 			image->Bleu[j][i] = res;
 			image->Vert[j][i] = res;
@@ -553,8 +541,7 @@ IMAGE * creerVagueSinuosidaleVerticale()
 	return image;
 }
 
-IMAGE * creerFFT(IMAGE * img)
-{
+IMAGE * creerFFT(IMAGE * img){
 	int hauteurImage = img->hauteurImage;
 	int largeurImage = img->largeurImage;
 
@@ -567,34 +554,13 @@ IMAGE * creerFFT(IMAGE * img)
 		fft(tmp[i],largeurImage);
 	}
 
-	cplx ** cpy = creerTabCplx(hauteurImage,largeurImage);
+	transposee(tmp, hauteurImage, largeurImage);
 
 	for (int i = 0; i < hauteurImage; i++) {
-		for (int j = 0; j < largeurImage; j++) {
-			cpy[i][j] = tmp[i][j];
-		}
-	}
-
-	for (int i = 0; i < hauteurImage; i++) {
-		for (int j = 0; j < largeurImage; j++) {
-			tmp[i][j] = cpy[j][i];
-		}
 		fft(tmp[i],largeurImage);
 	}
 
-	/* Transposée */
-	for (int i = 0; i < hauteurImage; i++) {
-		for (int j = 0; j < largeurImage; j++) {
-			cpy[i][j] = tmp[i][j];
-		}
-	}
-
-	for (int i = 0; i < hauteurImage; i++) {
-		for (int j = 0; j < largeurImage; j++) {
-			tmp[i][j] = cpy[j][i];
-		}
-	}
-	/* Fin Transposée */
+	transposee(tmp, hauteurImage, largeurImage);
 
 	IMAGE * image = NULL;
 	image = creerImageVide(256,256);
@@ -603,8 +569,8 @@ IMAGE * creerFFT(IMAGE * img)
 	unsigned short val = 0;
 	double realvar = 0.0;
 	double imagvar = 0.0;
-	unsigned short min = sizeof(unsigned short);
-	unsigned short max = 0;
+	double min = sizeof(unsigned short);
+	double max = 0;
 
 	for (int i = 0; i < hauteurImage; i++) {
 		for (int j = 0; j < largeurImage; j++) {
@@ -621,12 +587,15 @@ IMAGE * creerFFT(IMAGE * img)
 		}
 	}
 
+	double d;
+
 	for (int i = 0; i < hauteurImage; i++) {
 		for (int j = 0; j < largeurImage; j++) {
-			val =image->Bleu[i][j];
-			image->Bleu[i][j] = 255*((val-min)/(max-min));
-			image->Rouge[i][j] = 255*((val-min)/(max-min));
-			image->Vert[i][j] = 255*((val-min)/(max-min));
+			val = image->Bleu[i][j];
+			d = 255.0*((((double)val)-min)/(max-min));
+			image->Bleu[i][j] = d;
+			image->Rouge[i][j] = d;
+			image->Vert[i][j] = d;
 		}
 	}
 
